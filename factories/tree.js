@@ -133,10 +133,40 @@ const Tree = (arr) => {
     return currNode;
   };
 
+  const levelOrder = (callback, queue = [], node = root) => {
+    let currNode = node;
+    const references = queue;
+    const values = [];
+
+    if (currNode !== null) {
+      references.push(currNode);
+    }
+
+    while (references.length !== 0) {
+      currNode = references.shift();
+      values.push(currNode.data);
+
+      if (currNode.left !== null) {
+        references.push(currNode.left);
+      }
+
+      if (currNode.right !== null) {
+        references.push(currNode.right);
+      }
+
+      if (callback) {
+        callback(currNode);
+      }
+    }
+
+    return values;
+  };
+
   return {
     insert,
     remove,
     find,
+    levelOrder,
   };
 };
 
