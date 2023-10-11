@@ -117,9 +117,26 @@ const Tree = (arr) => {
     return currNode;
   };
 
+  const find = (value, node = root) => {
+    let currNode = node;
+
+    if (currNode === null) {
+      return null;
+    }
+
+    if (value < currNode.data) {
+      currNode = find(value, currNode.left);
+    } else if (value > currNode.data) {
+      currNode = find(value, currNode.right);
+    }
+
+    return currNode;
+  };
+
   return {
     insert,
     remove,
+    find,
   };
 };
 
