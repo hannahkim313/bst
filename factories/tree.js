@@ -37,9 +37,39 @@ const Tree = (arr) => {
     return root;
   };
 
-  const root = buildTree(sortedArr);
+  let root = buildTree(sortedArr);
 
-  return {};
+  const insert = (value, node = root) => {
+    let currNode = node;
+    const newNode = Node();
+    newNode.data = value;
+
+    if (currNode === null) {
+      root = newNode;
+    }
+
+    if (value < currNode.data) {
+      if (currNode.left === null) {
+        currNode.left = newNode;
+      }
+
+      currNode = currNode.left;
+      insert(value, currNode);
+    }
+
+    if (value > currNode.data) {
+      if (currNode.right === null) {
+        currNode.right = newNode;
+      }
+
+      currNode = currNode.right;
+      insert(value, currNode);
+    }
+  };
+
+  return {
+    insert,
+  };
 };
 
 export default Tree;
