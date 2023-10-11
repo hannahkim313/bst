@@ -54,6 +54,8 @@ const Tree = (arr) => {
 
     if (value < currNode.data) {
       if (currNode.left === null) {
+        currNode.left = newNode;
+
         return newNode;
       }
 
@@ -63,6 +65,8 @@ const Tree = (arr) => {
 
     if (value > currNode.data) {
       if (currNode.right === null) {
+        currNode.right = newNode;
+
         return newNode;
       }
 
@@ -73,8 +77,49 @@ const Tree = (arr) => {
     return currNode;
   };
 
+  const findMinNode = (node) => {
+    if (node.left === null) {
+      return node;
+    }
+
+    return findMinNode(node.left);
+  };
+
+  const remove = (value, node = root) => {
+    let currNode = node;
+
+    if (currNode === null) {
+      return null;
+    }
+
+    if (value < currNode.data) {
+      currNode.left = remove(value, currNode.left);
+    } else if (value > currNode.data) {
+      currNode.right = remove(value, currNode.right);
+    } else {
+      if (currNode.left === null && currNode.right === null) {
+        return null;
+      }
+
+      if (currNode.left === null) {
+        currNode = currNode.right;
+      } else if (currNode.right === null) {
+        currNode = currNode.left;
+      }
+
+      if (currNode.left !== null && currNode.right !== null) {
+        const minNode = findMinNode(currNode.right);
+        currNode.data = minNode.data;
+        currNode.right = remove(minNode.data, currNode.right);
+      }
+    }
+
+    return currNode;
+  };
+
   return {
     insert,
+    remove,
   };
 };
 
