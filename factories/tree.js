@@ -162,11 +162,62 @@ const Tree = (arr) => {
     return values;
   };
 
+  const preOrder = (callback, node = root, values = []) => {
+    if (node === null) {
+      return null;
+    }
+
+    if (callback) {
+      callback(node);
+    }
+
+    values.push(node.data);
+    preOrder(callback, node.left, values);
+    preOrder(callback, node.right, values);
+
+    return values;
+  };
+
+  const inOrder = (callback, node = root, values = []) => {
+    if (node === null) {
+      return null;
+    }
+
+    if (callback) {
+      callback(node);
+    }
+
+    inOrder(callback, node.left, values);
+    values.push(node.data);
+    inOrder(callback, node.right, values);
+
+    return values;
+  };
+
+  const postOrder = (callback, node = root, values = []) => {
+    if (node === null) {
+      return null;
+    }
+
+    if (callback) {
+      callback(node);
+    }
+
+    postOrder(callback, node.left, values);
+    postOrder(callback, node.right, values);
+    values.push(node.data);
+
+    return values;
+  };
+
   return {
     insert,
     remove,
     find,
     levelOrder,
+    preOrder,
+    inOrder,
+    postOrder,
   };
 };
 
