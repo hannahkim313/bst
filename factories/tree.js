@@ -277,6 +277,8 @@ const Tree = (arr) => {
     return true;
   };
 
+  const reBalance = () => buildTree(inOrder(null, root));
+
   return {
     insert,
     remove,
@@ -288,6 +290,7 @@ const Tree = (arr) => {
     height,
     depth,
     isBalanced,
+    reBalance,
   };
 };
 
