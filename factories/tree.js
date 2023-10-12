@@ -245,6 +245,38 @@ const Tree = (arr) => {
     return -1;
   };
 
+  const isBalancedCalc = (node) => {
+    if (node === null) {
+      return 0;
+    }
+
+    const leftHeight = isBalancedCalc(node.left);
+
+    if (leftHeight === -1) {
+      return -1;
+    }
+
+    const rightHeight = isBalancedCalc(node.right);
+
+    if (rightHeight === -1) {
+      return -1;
+    }
+
+    if (Math.abs(leftHeight - rightHeight) > 1) {
+      return -1;
+    }
+
+    return Math.max(leftHeight, rightHeight) + 1;
+  };
+
+  const isBalanced = (node = root) => {
+    if (isBalancedCalc(node) === -1) {
+      return false;
+    }
+
+    return true;
+  };
+
   return {
     insert,
     remove,
@@ -255,6 +287,7 @@ const Tree = (arr) => {
     postOrder,
     height,
     depth,
+    isBalanced,
   };
 };
 
