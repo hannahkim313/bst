@@ -225,6 +225,26 @@ const Tree = (arr) => {
     return rightDepth + 1;
   };
 
+  const depth = (node, refNode = root) => {
+    if (refNode === null || node === null) {
+      return -1;
+    }
+
+    if (node.data === refNode.data) {
+      return 0;
+    }
+
+    if (node.data < refNode.data) {
+      return depth(node, refNode.left) + 1;
+    }
+
+    if (node.data > refNode.data) {
+      return depth(node, refNode.right) + 1;
+    }
+
+    return -1;
+  };
+
   return {
     insert,
     remove,
@@ -234,6 +254,7 @@ const Tree = (arr) => {
     inOrder,
     postOrder,
     height,
+    depth,
   };
 };
 
