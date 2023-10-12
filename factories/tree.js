@@ -37,7 +37,7 @@ const Tree = (arr) => {
     return root;
   };
 
-  const root = buildTree(sortedArr);
+  let root = buildTree(sortedArr);
 
   const insert = (value, node = root) => {
     let currNode = node;
@@ -277,7 +277,9 @@ const Tree = (arr) => {
     return true;
   };
 
-  const reBalance = () => buildTree(inOrder(null, root));
+  const reBalance = () => {
+    root = buildTree(inOrder(null, root));
+  };
 
   return {
     insert,
