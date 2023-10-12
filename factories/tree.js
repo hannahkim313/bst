@@ -211,7 +211,7 @@ const Tree = (arr) => {
   };
 
   const height = (node = root) => {
-    if (node === null) {
+    if (node === null || (node.left === null && node.right === null)) {
       return 0;
     }
 
