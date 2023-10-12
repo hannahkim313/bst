@@ -210,6 +210,21 @@ const Tree = (arr) => {
     return values;
   };
 
+  const height = (node = root) => {
+    if (node === null) {
+      return 0;
+    }
+
+    const leftDepth = height(node.left);
+    const rightDepth = height(node.right);
+
+    if (leftDepth > rightDepth) {
+      return leftDepth + 1;
+    }
+
+    return rightDepth + 1;
+  };
+
   return {
     insert,
     remove,
@@ -218,6 +233,7 @@ const Tree = (arr) => {
     preOrder,
     inOrder,
     postOrder,
+    height,
   };
 };
 
